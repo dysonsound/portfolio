@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matt Dyson – Audio Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0d0d;
+      --bg2:       #141414;
+      --bg3:       #1c1c1c;
+      --accent:    #c8a96e;
+      --accent2:   #e0c080;
+      --text:      #e8e8e8;
+      --muted:     #888;
+      --border:    #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 60%, #1a1507 0%, var(--bg) 70%);
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 39px,
+          rgba(255,255,255,0.018) 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 39px,
+          rgba(255,255,255,0.018) 40px
+        );
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 700px; }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 48px;
+    }
+    .hero-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 2px;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0d;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+    }
+
+    /* ─── SECTIONS ────────────────────────────────────────── */
+    section { padding: 100px 40px; }
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .section-lead {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 24px 0;
+    }
+
+    /* ─── PROJECTS ────────────────────────────────────────── */
+    #projects { background: var(--bg); }
+    .projects-header { max-width: 1200px; margin: 0 auto 60px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 3px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .grid-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--bg3);
+      cursor: default;
+    }
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+      filter: grayscale(20%) brightness(0.85);
+    }
+    .grid-item:hover img {
+      transform: scale(1.07);
+      filter: grayscale(0%) brightness(1);
+    }
+    .grid-caption {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 14px 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .grid-item:hover .grid-caption { opacity: 1; }
+    .grid-caption span {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────────── */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      color: #c8c8c8;
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(12%) brightness(0.92);
+      transition: filter 0.4s;
+    }
+    .about-photo img:hover {
+      filter: grayscale(0%) brightness(1);
+    }
+
+    /* ─── FULL CREDITS ────────────────────────────────────── */
+    #credits { background: var(--bg); }
+    .credits-inner { max-width: 1100px; margin: 0 auto; }
+    .credits-category { margin-bottom: 64px; }
+    .credits-category:last-child { margin-bottom: 0; }
+    .credits-category-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .credits-table { width: 100%; border-collapse: collapse; }
+    .credits-table tr { border-bottom: 1px solid var(--border); }
+    .credits-table tr:last-child { border-bottom: none; }
+    .credits-table td {
+      padding: 13px 8px;
+      font-size: 0.84rem;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .credits-table td:first-child {
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      width: 46px;
+      padding-top: 15px;
+    }
+    .credits-table td:nth-child(2) { color: #fff; font-weight: 400; min-width: 200px; }
+    .credits-table td:nth-child(3) { color: #bbb; }
+    .credits-table td:last-child {
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .credits-table tr:hover td { background: rgba(255,255,255,0.02); }
+    @media (max-width: 600px) {
+      .credits-table td:last-child { display: none; }
+      .credits-table td:first-child { display: none; }
+    }
+
+    /* ─── LINKS ───────────────────────────────────────────── */
+    #links {
+      background: var(--bg);
+      padding-bottom: 0;
+    }
+    .links-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .link-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .link-card:hover {
+      border-color: var(--accent);
+      background: var(--bg3);
+    }
+    .link-card-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .link-card-title {
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 400;
+    }
+    .link-card-arrow {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-top: auto;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .link-card:hover .link-card-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────────── */
+    #contact {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-items { display: flex; flex-direction: column; gap: 32px; }
+    .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    .contact-detail-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .contact-detail-value {
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .contact-detail-value a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-detail-value a:hover { color: var(--accent); }
+    .contact-cta { padding-top: 16px; }
+    .contact-cta p {
+      font-size: 1.05rem;
+      color: #c8c8c8;
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p { font-size: 0.75rem; color: #444; letter-spacing: 0.06em; }
+    footer a { color: #555; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 860px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<nav>
+  <a href="#hero" class="nav-logo">dyson<span>sound</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#credits">Credits</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Los Angeles · Studio City</p>
+    <h1 class="hero-title">Matt <em>Dyson</em></h1>
+    <p class="hero-subtitle">Audio Professional</p>
+    <div class="hero-links">
+      <a href="#credits" class="btn btn-primary">Full Credits</a>
+      <a href="#about" class="btn btn-outline">About</a>
+      <a href="#contact" class="btn btn-outline">Contact</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ── PROJECTS ─────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="projects-header">
+    <p class="section-label">Selected Projects</p>
+    <h2 class="section-title">Credits</h2>
+    <div class="divider"></div>
+    <p class="section-lead">A selection of artists, albums, and productions across recording, mixing, and engineering.</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/adele-30-300x300.jpg" alt="Adele – 30" loading="lazy">
+      <div class="grid-caption"><span>Adele – 30</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/pentatonix_evergreen-300x300.jpg" alt="Pentatonix – Evergreen" loading="lazy">
+      <div class="grid-caption"><span>Pentatonix – Evergreen</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/cam_the-otherside-300x300.jpg" alt="Cam – The Otherside" loading="lazy">
+      <div class="grid-caption"><span>Cam – The Otherside</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/lukasNelson-nakedGarden-300x300.jpg" alt="Lukas Nelson – Naked Garden" loading="lazy">
+      <div class="grid-caption"><span>Lukas Nelson &amp; Promise of the Real – Naked Garden</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/UglyIsBeautiful-300x300.jpg" alt="Oliver Tree" loading="lazy">
+      <div class="grid-caption"><span>Oliver Tree</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/Before_I_Go_by_Guy_Sebastian-300x300.jpg" alt="Guy Sebastian" loading="lazy">
+      <div class="grid-caption"><span>Guy Sebastian</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/KESHA_HIGH_ROAD_cover_low_res_600_600.jpg" alt="Kesha – High Road" loading="lazy">
+      <div class="grid-caption"><span>Kesha – High Road</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/1579510946_jennifer-foster-jennifer-foster-live-at-the-village-2020-flac.jpg" alt="Jennifer Foster" loading="lazy">
+      <div class="grid-caption"><span>Jennifer Foster</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/a1220106336_10-300x300.jpg" alt="Julie Craig" loading="lazy">
+      <div class="grid-caption"><span>Julie Craig</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/81PRserUsnL._SS500_-300x300.jpg" alt="Citizen Cope" loading="lazy">
+      <div class="grid-caption"><span>Citizen Cope</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/TurnOff_LukasNelson.jpg" alt="Lukas Nelson and Promise of the Real" loading="lazy">
+      <div class="grid-caption"><span>Lukas Nelson &amp; Promise of the Real</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/810020500219-cover-zoom.jpg" alt="Beth Hart" loading="lazy">
+      <div class="grid-caption"><span>Beth Hart</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/61eC6AH6UHL._SS500_-300x300.jpg" alt="Ollie Gabriel" loading="lazy">
+      <div class="grid-caption"><span>Ollie Gabriel</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/image-1-300x300.jpg" alt="Hobo Johnson" loading="lazy">
+      <div class="grid-caption"><span>Hobo Johnson</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/2d6d85b3319cac1e4a5ba43904ca99cc.1000x1000x1-300x300.jpg" alt="Morgxn" loading="lazy">
+      <div class="grid-caption"><span>Morgxn</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/Dy16FKcWoAEaIOT-300x300.jpg" alt="Dave Matthews Band" loading="lazy">
+      <div class="grid-caption"><span>Dave Matthews Band</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/600x600bf-300x300.png" alt="Michael Bublé" loading="lazy">
+      <div class="grid-caption"><span>Michael Bublé</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/71UUkJvqVNL._SY355_-300x300.jpg" alt="Kandace Springs" loading="lazy">
+      <div class="grid-caption"><span>Kandace Springs</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/713RaploVHL._SY355_-300x300.jpg" alt="Stanley Clarke" loading="lazy">
+      <div class="grid-caption"><span>Stanley Clarke</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/81hubzmP-L._SY355_-300x300.jpg" alt="Kenny Chesney" loading="lazy">
+      <div class="grid-caption"><span>Kenny Chesney</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/rsz_alp_logo2-300x300.jpg" alt="Lin-Manuel Miranda" loading="lazy">
+      <div class="grid-caption"><span>Lin-Manuel Miranda</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/81WvH498n5L._SL1500_-300x300.jpg" alt="P!nk" loading="lazy">
+      <div class="grid-caption"><span>P!nk</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/harry-styles-300x300.jpg" alt="Harry Styles" loading="lazy">
+      <div class="grid-caption"><span>Harry Styles</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/Robert_Beatty_Brian_Roettinger_Olivia_Bee_artwork_Kesha_Rainbow_graphic_design_itsnicethat-300x300.png" alt="Kesha – Rainbow" loading="lazy">
+      <div class="grid-caption"><span>Kesha – Rainbow</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/Big-Baby-DRAM-Cover-2016-billboard-1240-300x300.jpg" alt="DRAM" loading="lazy">
+      <div class="grid-caption"><span>DRAM</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/81-77efEKiL._SL1500_-300x300.jpg" alt="Ant-Man" loading="lazy">
+      <div class="grid-caption"><span>Ant-Man</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/51LqmPyMzCL._SY355_-300x300.jpg" alt="Ben Harper &amp; The Innocent Criminals" loading="lazy">
+      <div class="grid-caption"><span>Ben Harper &amp; The Innocent Criminals</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/51KsghuErnL-300x300.jpg" alt="Ana Moura" loading="lazy">
+      <div class="grid-caption"><span>Ana Moura</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/71fb0887-eb76-41bd-bf27-337c2da39dba_1.aeddb1842fe9a023480f5b85cc818c87-300x300.jpeg" alt="Lesley Kernochan" loading="lazy">
+      <div class="grid-caption"><span>Lesley Kernochan</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/51nuInUWwL._SS500-300x300.jpg" alt="Katie Toupin" loading="lazy">
+      <div class="grid-caption"><span>Katie Toupin</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/417lkwqnJxL._SS500-300x300.jpg" alt="Steven Davis" loading="lazy">
+      <div class="grid-caption"><span>Steven Davis</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/613-wQhWPEL._SS500-300x300.jpg" alt="Jennifer Hudson" loading="lazy">
+      <div class="grid-caption"><span>Jennifer Hudson</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/71xgB06d6PL._SY355_-300x300.jpg" alt="Sarah Brightman" loading="lazy">
+      <div class="grid-caption"><span>Sarah Brightman</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/LogicEverybody-300x300.jpg" alt="Logic" loading="lazy">
+      <div class="grid-caption"><span>Logic</span></div>
+    </div>
+
+    <div class="grid-item">
+      <img src="./matt dyson – audio engineer_files/81dG2z6DDVL._SX355_-300x269.jpg" alt="Sangeeta Kaur" loading="lazy">
+      <div class="grid-caption"><span>Sangeeta Kaur</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FULL CREDITS ──────────────────────────────────────────── -->
+<section id="credits">
+  <div class="credits-inner">
+    <p class="section-label">Complete List</p>
+    <h2 class="section-title">All Credits</h2>
+    <div class="divider"></div>
+
+    <!-- MUSIC -->
+    <div class="credits-category" style="margin-top: 48px;">
+      <div class="credits-category-title">Music</div>
+      <table class="credits-table">
+        <tbody>
+          <tr><td>2025</td><td>Dave Matthews Band – Where Are You Going: The Singles</td><td>Engineer</td><td>RCA / Bama Rags</td></tr>
+          <tr><td>2025</td><td>Sarah Brightman – Starlight Symphony: Best Collection</td><td>Engineer</td><td>Decca / Universal</td></tr>
+          <tr><td>2024</td><td>MC5 – Heavy Lifting</td><td>Engineer</td><td>Ear Music</td></tr>
+          <tr><td>2024</td><td>Morgan Wade – Obsessed</td><td>Editing, Vocal Engineer</td><td>RCA</td></tr>
+          <tr><td>2024</td><td>The Tomicks – The Life And Times Of The Tomicks</td><td>Engineer</td><td></td></tr>
+          <tr><td>2023</td><td>Kesha – Gag Order</td><td>Vocal Engineer</td><td>Kemosabe / RCA</td></tr>
+          <tr><td>2023</td><td>Pentatonix – The Greatest Christmas Hits</td><td>Engineer</td><td>RCA</td></tr>
+          <tr><td>2023</td><td>Ask Carol – AC I: Control You</td><td>Engineer</td><td>ChoVan Records</td></tr>
+          <tr><td>2022</td><td>Osaka Popstar – Ear Candy</td><td>Engineer</td><td></td></tr>
+          <tr><td>2021</td><td>Adele – 30</td><td>Engineer</td><td>Sony Music</td></tr>
+          <tr><td>2021</td><td>Pentatonix – Evergreen</td><td>Engineer</td><td>RCA</td></tr>
+          <tr><td>2021</td><td>Wræbel – These Words Are All for You</td><td>Vocal Engineer</td><td></td></tr>
+          <tr><td>2021</td><td>Burt Bacharach &amp; Steven Sater – Some Lovers</td><td>Engineer</td><td></td></tr>
+          <tr><td>2021</td><td>Lyle Mays – Eberhard</td><td>Assistant Engineer</td><td></td></tr>
+          <tr><td>2021</td><td>Cameron Graves – Seven</td><td>Engineer</td><td>Mack Avenue</td></tr>
+          <tr><td>2020</td><td>Cam – The Otherside</td><td>Assistant Engineer</td><td></td></tr>
+          <tr><td>2020</td><td>Lukas Nelson &amp; Promise of the Real – Naked Garden</td><td>Assistant Engineer, Second Engineer</td><td>Fantasy</td></tr>
+          <tr><td>2020</td><td>Oliver Tree – Ugly Is Beautiful</td><td>Engineer</td><td>Atlantic</td></tr>
+          <tr><td>2020</td><td>Kesha – High Road</td><td>Engineer, Producer, Vocal Engineer</td><td>Kemosabe / RCA</td></tr>
+          <tr><td>2020</td><td>Guy Sebastian – T.R.U.T.H.</td><td>Engineer</td><td>Sony Music</td></tr>
+          <tr><td>2020</td><td>Jimmy Buffett – Life on the Flip Side</td><td>Engineer</td><td></td></tr>
+          <tr><td>2020</td><td>Various – The Prom (Netflix Film Soundtrack)</td><td>Engineer</td><td>Masterworks / Netflix</td></tr>
+          <tr><td>2020</td><td>Ty Herndon – Regifted</td><td>Engineer</td><td></td></tr>
+          <tr><td>2020</td><td>Lukas Nelson &amp; Promise of the Real – Couldn't Break Your Heart</td><td>Assistant Engineer</td><td>Fantasy</td></tr>
+          <tr><td>2019</td><td>Beth Hart – War In My Mind</td><td>Engineer</td><td>Provogue</td></tr>
+          <tr><td>2019</td><td>Lukas Nelson &amp; Promise of the Real – Turn Off The News, Build A Garden</td><td>Assistant Engineer</td><td>Fantasy</td></tr>
+          <tr><td>2019</td><td>Hobo Johnson – The Fall of Hobo Johnson</td><td>Engineer</td><td></td></tr>
+          <tr><td>2019</td><td>Citizen Cope – Heroin and Helicopters</td><td>Assistant Engineer</td><td></td></tr>
+          <tr><td>2019</td><td>Ollie Gabriel – Something New (From "Songland")</td><td>Engineer</td><td>BMG</td></tr>
+          <tr><td>2018</td><td>Dave Matthews Band – Come Tomorrow</td><td>Engineer</td><td>RCA / Bama Rags</td></tr>
+          <tr><td>2018</td><td>Michael Bublé – Love</td><td>Assistant Engineer</td><td>Reprise</td></tr>
+          <tr><td>2018</td><td>Kandace Springs – Indigo</td><td>Engineer</td><td>Blue Note</td></tr>
+          <tr><td>2018</td><td>Kenny Chesney – Songs For The Saints</td><td>Assistant Engineer</td><td>Blue Chair / Warner</td></tr>
+          <tr><td>2018</td><td>Sarah Brightman – Hymn</td><td>Engineer</td><td>Decca Gold / Universal</td></tr>
+          <tr><td>2018</td><td>Jason Mraz – Know.</td><td>Engineer</td><td>Atlantic</td></tr>
+          <tr><td>2018</td><td>Stanley Clarke Band – The Message</td><td>Assistant Engineer</td><td></td></tr>
+          <tr><td>2018</td><td>Anthony Ramos – The Freedom EP</td><td>Assistant Engineer</td><td></td></tr>
+          <tr><td>2018</td><td>Katie Toupin – Moroccan Ballroom EP</td><td>Engineer</td><td></td></tr>
+          <tr><td>2017</td><td>Harry Styles – Harry Styles</td><td>Assistant Engineer</td><td>Columbia / Sony Music</td></tr>
+          <tr><td>2017</td><td>P!nk – Beautiful Trauma</td><td>Assistant Engineer</td><td>RCA / Sony Music</td></tr>
+          <tr><td>2017</td><td>Kesha – Rainbow</td><td>Assistant Engineer</td><td>Kemosabe / RCA</td></tr>
+          <tr><td>2017</td><td>Ben Harper &amp; The Innocent Criminals – Call It What It Is</td><td>Assistant Engineer</td><td>Stax</td></tr>
+          <tr><td>2017</td><td>Lin-Manuel Miranda – Almost Like Praying</td><td>Assistant Engineer</td><td></td></tr>
+          <tr><td>2017</td><td>Lesley Kernochan – A Calm Sun</td><td>Engineer</td><td>Maple Syrup Music</td></tr>
+          <tr><td>2017</td><td>Claudia Koreck – Holodeck</td><td>Engineer</td><td>Honu Lani Records</td></tr>
+          <tr><td>2017</td><td>Jennifer Hudson – Burden Down (Single)</td><td>Engineer</td><td>Epic</td></tr>
+          <tr><td>2017</td><td>Jennifer Hudson – Remember Me (Single)</td><td>Engineer</td><td>Epic</td></tr>
+          <tr><td>2016</td><td>Ana Moura – Moura</td><td>Assistant Engineer</td><td>Universal Music Classics</td></tr>
+          <tr><td>2016</td><td>DRAM – Big Baby D.R.A.M.</td><td>Recording</td><td></td></tr>
+          <tr><td>2016</td><td>Takeshi Furukawa – 人喰いの大鷲トリコ (The Last Guardian) OST</td><td>Engineer</td><td>Team Entertainment</td></tr>
+          <tr><td>2015</td><td>Christophe Beck – Ant-Man (Original Motion Picture Soundtrack)</td><td>Assistant Engineer</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PODCASTS & FILM/TV -->
+    <div class="credits-category">
+      <div class="credits-category-title">Podcasts &amp; Film / TV</div>
+      <table class="credits-table">
+        <tbody>
+          <tr><td>2026</td><td>The Hive: A Thriller</td><td>Head Editor</td><td>Podcast Series</td></tr>
+          <tr><td>2023</td><td>Killer Psyche Daily</td><td>Mix &amp; Sound Design</td><td>Podcast · 151 episodes</td></tr>
+          <tr><td>2023</td><td>Moriarty: The Silent Order</td><td>Editor</td><td>Video</td></tr>
+          <tr><td>2022–23</td><td>Killer Psyche</td><td>Mix &amp; Sound Design</td><td>Podcast · 71 episodes</td></tr>
+          <tr><td>2022</td><td>Moriarty: The Devil's Game</td><td>Sound Editor</td><td>Podcast Series</td></tr>
+          <tr><td>2022</td><td>Catchers</td><td>Editor</td><td>Podcast Series</td></tr>
+          <tr><td>2021</td><td>Free Guy</td><td>Mixing Assistant</td><td>Film</td></tr>
+          <tr><td>2015</td><td>Ant-Man</td><td>Assistant Engineer</td><td>Film</td></tr>
+          <tr><td>—</td><td>Downton Abbey: The Official Podcast</td><td>Audio Editor</td><td>Podcast Series</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2 class="section-title">Audio Professional<br>Based in LA</h2>
+      <div class="divider"></div>
+      <p>Matt Dyson is a Los Angeles-based audio professional whose work spans multi-platinum albums, major-label releases, film, television, and podcast production. Currently serving as Head of Audio at Treefort Media, he brings the same level of craft and precision to every format he works in.</p>
+      <p>With credits ranging from Adele and Harry Styles to Killer Psyche and The Hive, Matt's background covers music recording and mixing, audio post production, sound design, and editorial — making him equally at home in a recording studio or a post suite.</p>
+    </div>
+    <div class="about-photo">
+      <img src="./dyson_headshot_26.jpg" alt="Matt Dyson – Audio Professional">
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CONTACT ────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-cta">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">
+            <a href="mailto:dysonsound@gmail.com">dysonsound@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">☎</div>
+        <div>
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">
+            <a href="tel:8607292358">860 729 2358</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <p>© 2025 Matt Dyson · Audio Professional · Studio City, Los Angeles</p>
+  <p>Photo credit: <a href="https://www.instagram.com/dysonsound/" target="_blank" rel="noopener">Ashley Osborn</a></p>
+</footer>
+
+</body>
+</html>
